@@ -1,84 +1,59 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from '../AuthContext';
 import '../styles/Login.css';
+import mockData from '../mockData';
 
 const Login = () => {
   const [role, setRole] = useState('admin');
-  const [identifier, setIdentifier] = useState('');
+  const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [message, setMessage] = useState('');
-  const navigate = useNavigate();
   const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    // Hardcoded credentials for demo purposes
     const credentials = {
-      admin: 'admin123',
-      practitioner: 'practitioner123',
-      patient: 'patient123',
+      admin: { loginId: 'admin', password: 'admin123' },
+      practitioner: { loginId: 'practitioner', password: 'practitioner123' },
+      patient: mockData.patients.find(patient => patient.loginId === loginId && patient.password === password)
     };
 
-    if (password === credentials[role]) {
+    if (role === 'patient' && credentials[role]) {
+      login();
+      navigate(`/${role}`, { state: { loginId } });
+    } else if (credentials[role] && credentials[role].loginId === loginId && credentials[role].password === password) {
       login();
       navigate(`/${role}`);
     } else {
-      setMessage('Incorrect password');
+      alert('Invalid credentials');
     }
-  };
-
-  const getIdentifierLabel = () => {
-    switch (role) {
-      case 'admin':
-        return 'Login ID';
-      case 'practitioner':
-        return 'Medical ID';
-      case 'patient':
-        return 'Birth Certificate Number';
-      default:
-        return 'Identifier';
-    }
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
   };
 
   return (
     <div className="login-container">
-      <h2>Hospital Management System</h2>
-      <div className="login-form">
-        <label>
-          Role:
+      <h1>Hospital Management System</h1>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Role:</label>
           <select value={role} onChange={(e) => setRole(e.target.value)}>
             <option value="admin">Admin</option>
             <option value="practitioner">Medical Practitioner</option>
             <option value="patient">Patient</option>
           </select>
-        </label>
-        <label>
-          {getIdentifierLabel()}:
-          <input
-            type="text"
-            value={identifier}
-            onChange={(e) => setIdentifier(e.target.value)}
-          />
-        </label>
-        <label className="password-label">
-          Password:
-          <input
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <span className="password-toggle-icon" onClick={togglePasswordVisibility}>
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
-        </label>
-        <button onClick={handleLogin}>Login</button>
-        {message && <p>{message}</p>}
-      </div>
+        </div>
+        <div>
+          <label>{role === 'admin' ? 'Login ID' : role === 'patient' ? 'Birth Certificate Number' : 'Medical ID'}:</label>
+          <input type="text" value={loginId} onChange={(e) => setLoginId(e.target.value)} />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        <button type="submit">Login</button>
+      </form>
     </div>
   );
 };

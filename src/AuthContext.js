@@ -4,13 +4,11 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    // Retrieve the initial authentication state from local storage
     const storedAuthState = localStorage.getItem('isAuthenticated');
     return storedAuthState === 'true';
   });
 
   useEffect(() => {
-    // Update local storage whenever the authentication state changes
     localStorage.setItem('isAuthenticated', isAuthenticated);
   }, [isAuthenticated]);
 
@@ -20,7 +18,6 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setIsAuthenticated(false);
-    sessionStorage.clear();
     localStorage.clear();
   };
 
