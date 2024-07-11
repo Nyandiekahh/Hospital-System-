@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import '../styles/Login.css';
+import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useAuth } from '../AuthContext';
+import '../styles/Login.css';
 
 const Login = () => {
   const [role, setRole] = useState('admin');
@@ -8,6 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = () => {
     const credentials = {
@@ -17,7 +21,8 @@ const Login = () => {
     };
 
     if (password === credentials[role]) {
-      setMessage(`Welcome, ${role}!`);
+      login();
+      navigate(`/${role}`);
     } else {
       setMessage('Incorrect password');
     }
