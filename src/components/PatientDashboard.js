@@ -1,76 +1,74 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import WelcomeSection from './WelcomeSection';
-import HealthSummary from './HealthSummary';
-import QuickActions from './QuickActions';
-import HealthTips from './HealthTips';
-import RecentActivity from './RecentActivity';
-import UpcomingAppointments from './UpcomingAppointments';
-import MedicationSchedule from './MedicationSchedule';
+import PatientSearch from './PatientSearch';
+import Appointments from './Appointments';
+import DoctorAvailability from './DoctorAvailability';
+import MedicalRecords from './MedicalRecords';
+import TestResults from './TestResults';
+import Prescriptions from './Prescriptions';
+import SupportHelp from './SupportHelp';
+import ProfileSettings from './ProfileSettings';
+import HealthNews from './HealthNews';
+import FAQs from './FAQs';
 import Notifications from './Notifications';
-import HealthGoals from './HealthGoals';
-import EmergencyInfo from './EmergencyInfo';
+import Feedback from './Feedback';
 import Sidebar from './Sidebar';
-import mockData from '../mockData';
+import '../styles/App.css';
 
-const PatientDashboard = () => {
-  const location = useLocation();
-  const loginId = location.state?.loginId;
-  const patient = mockData.patients.find(p => p.loginId === loginId);
-  const { healthTips } = mockData;
-  const apiKey = 'AIzaSyCPaptzr8MjnZLwkozVo7ebSE5s6SDlkKM'; // Your actual API key
+// Mock data for notifications
+const mockNotifications = [
+  "Appointment with patient John Doe at 10:00 AM",
+  "Test results for patient Jane Smith are available",
+  "New message from admin"
+];
 
-  if (!patient) {
-    return (
-      <div className="dashboard-container">
-        <Sidebar role="patient" />
-        <div className="main-content">
-          <div className="patient-dashboard">
-            <h1>Patient not found</h1>
-            <p>We could not find the patient data. Please check your login credentials and try again.</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+const PractitionerDashboard = () => {
   return (
     <div className="dashboard-container">
-      <Sidebar role="patient" />
-      <div className="main-content fade-in-up">
+      <Sidebar role="practitioner" />
+      <div className="main-content">
         <div className="card">
-          <WelcomeSection name={patient.name} upcomingAppointments={patient.upcomingAppointments} />
+          <WelcomeSection name="Practitioner" />
         </div>
         <div className="card">
-          <HealthSummary lastCheckup={patient.lastCheckup} bloodPressure={patient.bloodPressure} weight={patient.weight} />
+          <PatientSearch />
         </div>
         <div className="card">
-          <QuickActions />
+          <Appointments />
         </div>
         <div className="card">
-          <HealthTips tips={healthTips} />
+          <DoctorAvailability />
         </div>
         <div className="card">
-          <RecentActivity activities={patient.recentActivities} />
+          <MedicalRecords />
         </div>
         <div className="card">
-          <UpcomingAppointments appointments={patient.upcomingAppointmentsDetails} />
+          <TestResults />
         </div>
         <div className="card">
-          <MedicationSchedule schedule={patient.medicationSchedule} />
+          <Prescriptions />
         </div>
         <div className="card">
-          <Notifications notifications={patient.notifications} />
+          <SupportHelp />
         </div>
         <div className="card">
-          <HealthGoals goals={patient.healthGoals} />
+          <ProfileSettings />
         </div>
         <div className="card">
-          <EmergencyInfo contact={patient.emergencyContact} apiKey={apiKey} />
+          <HealthNews />
+        </div>
+        <div className="card">
+          <FAQs />
+        </div>
+        <div className="card">
+          <Notifications notifications={mockNotifications} /> {/* Pass notifications here */}
+        </div>
+        <div className="card">
+          <Feedback />
         </div>
       </div>
     </div>
   );
 };
 
-export default PatientDashboard;
+export default PractitionerDashboard;

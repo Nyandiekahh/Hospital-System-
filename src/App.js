@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AdminDashboard from './components/AdminDashboard';
-import PractitionerLanding from './pages/PractitionerLanding'; // Assuming this page exists
+import PractitionerDashboard from './components/PractitionerDashboard'; // Updated import
 import PatientDashboard from './components/PatientDashboard';
 import Login from './components/Login';
 import { AuthProvider } from './AuthContext';
@@ -26,7 +26,7 @@ function App() {
             path="/practitioner" 
             element={
               <ProtectedRoute>
-                <PractitionerLanding />
+                <PractitionerDashboard />
               </ProtectedRoute>
             } 
           />
