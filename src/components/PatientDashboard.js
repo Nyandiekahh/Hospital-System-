@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import WelcomeSection from './WelcomeSection';
 import HealthSummary from './HealthSummary';
@@ -14,16 +13,12 @@ import EmergencyInfo from './EmergencyInfo';
 import Sidebar from './Sidebar';
 import mockData from '../mockData';
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-};
-
 const PatientDashboard = () => {
   const location = useLocation();
   const loginId = location.state?.loginId;
   const patient = mockData.patients.find(p => p.loginId === loginId);
   const { healthTips } = mockData;
+  const apiKey = 'AIzaSyCPaptzr8MjnZLwkozVo7ebSE5s6SDlkKM'; // Your actual API key
 
   if (!patient) {
     return (
@@ -42,37 +37,37 @@ const PatientDashboard = () => {
   return (
     <div className="dashboard-container">
       <Sidebar role="patient" />
-      <div className="main-content">
-        <motion.div className="card" variants={cardVariants} initial="hidden" animate="visible">
+      <div className="main-content fade-in-up">
+        <div className="card">
           <WelcomeSection name={patient.name} upcomingAppointments={patient.upcomingAppointments} />
-        </motion.div>
-        <motion.div className="card" variants={cardVariants} initial="hidden" animate="visible">
+        </div>
+        <div className="card">
           <HealthSummary lastCheckup={patient.lastCheckup} bloodPressure={patient.bloodPressure} weight={patient.weight} />
-        </motion.div>
-        <motion.div className="card" variants={cardVariants} initial="hidden" animate="visible">
+        </div>
+        <div className="card">
           <QuickActions />
-        </motion.div>
-        <motion.div className="card" variants={cardVariants} initial="hidden" animate="visible">
+        </div>
+        <div className="card">
           <HealthTips tips={healthTips} />
-        </motion.div>
-        <motion.div className="card" variants={cardVariants} initial="hidden" animate="visible">
+        </div>
+        <div className="card">
           <RecentActivity activities={patient.recentActivities} />
-        </motion.div>
-        <motion.div className="card" variants={cardVariants} initial="hidden" animate="visible">
+        </div>
+        <div className="card">
           <UpcomingAppointments appointments={patient.upcomingAppointmentsDetails} />
-        </motion.div>
-        <motion.div className="card" variants={cardVariants} initial="hidden" animate="visible">
+        </div>
+        <div className="card">
           <MedicationSchedule schedule={patient.medicationSchedule} />
-        </motion.div>
-        <motion.div className="card" variants={cardVariants} initial="hidden" animate="visible">
+        </div>
+        <div className="card">
           <Notifications notifications={patient.notifications} />
-        </motion.div>
-        <motion.div className="card" variants={cardVariants} initial="hidden" animate="visible">
+        </div>
+        <div className="card">
           <HealthGoals goals={patient.healthGoals} />
-        </motion.div>
-        <motion.div className="card" variants={cardVariants} initial="hidden" animate="visible">
-          <EmergencyInfo contact={patient.emergencyContact} hospital={patient.nearestHospital} />
-        </motion.div>
+        </div>
+        <div className="card">
+          <EmergencyInfo contact={patient.emergencyContact} apiKey={apiKey} />
+        </div>
       </div>
     </div>
   );

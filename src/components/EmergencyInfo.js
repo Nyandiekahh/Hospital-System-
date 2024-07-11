@@ -1,10 +1,11 @@
 import React from 'react';
+import GoogleMaps from './GoogleMaps';
 
-const EmergencyInfo = ({ contact, hospital }) => (
+const EmergencyInfo = ({ contact, apiKey }) => (
   <div>
     <h2>Emergency Information</h2>
     <p>In case of emergency, call: {contact}</p>
-    <p>Nearest hospital: {hospital}</p>
+    <GoogleMaps apiKey={apiKey} />
   </div>
 );
 
