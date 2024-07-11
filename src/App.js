@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AdminLanding from './pages/AdminLanding';
-import PractitionerLanding from './pages/PractitionerLanding';
+import AdminDashboard from './components/AdminDashboard';
+import PractitionerLanding from './pages/PractitionerLanding'; // Assuming this page exists
 import PatientDashboard from './components/PatientDashboard';
 import Login from './components/Login';
 import { AuthProvider } from './AuthContext';
@@ -18,7 +18,7 @@ function App() {
             path="/admin" 
             element={
               <ProtectedRoute>
-                <AdminLanding />
+                <AdminDashboard />
               </ProtectedRoute>
             } 
           />
