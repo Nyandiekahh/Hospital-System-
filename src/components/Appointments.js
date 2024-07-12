@@ -1,9 +1,10 @@
 import React from 'react';
+import DoctorCalendar from './DoctorCalendar';
 
 const Appointments = () => (
   <div>
     <h2>Appointments</h2>
-    <p>List of upcoming and past appointments.</p>
+    <DoctorCalendar />
   </div>
 );
 

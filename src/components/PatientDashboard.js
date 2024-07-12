@@ -1,9 +1,8 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import WelcomeSection from './WelcomeSection';
-import PatientSearch from './PatientSearch';
-import Appointments from './Appointments';
-import DoctorAvailability from './DoctorAvailability';
 import MedicalRecords from './MedicalRecords';
+import Appointments from './Appointments';
 import TestResults from './TestResults';
 import Prescriptions from './Prescriptions';
 import SupportHelp from './SupportHelp';
@@ -17,27 +16,23 @@ import '../styles/App.css';
 
 // Mock data for notifications
 const mockNotifications = [
-  "Appointment with patient John Doe at 10:00 AM",
-  "Test results for patient Jane Smith are available",
-  "New message from admin"
+  "Your test results are available.",
+  "Upcoming appointment in 2 days."
 ];
 
-const PractitionerDashboard = () => {
+const PatientDashboard = () => {
+  const location = useLocation();
+  const { user } = location.state || { user: { name: 'Patient', personalizedMessage: 'Welcome!' } };
+
   return (
     <div className="dashboard-container">
-      <Sidebar role="practitioner" />
+      <Sidebar role="patient" />
       <div className="main-content">
         <div className="card">
-          <WelcomeSection name="Practitioner" />
-        </div>
-        <div className="card">
-          <PatientSearch />
+          <WelcomeSection name={user.name} message={user.personalizedMessage} />
         </div>
         <div className="card">
           <Appointments />
-        </div>
-        <div className="card">
-          <DoctorAvailability />
         </div>
         <div className="card">
           <MedicalRecords />
@@ -61,7 +56,7 @@ const PractitionerDashboard = () => {
           <FAQs />
         </div>
         <div className="card">
-          <Notifications notifications={mockNotifications} /> {/* Pass notifications here */}
+          <Notifications notifications={mockNotifications} />
         </div>
         <div className="card">
           <Feedback />
@@ -71,4 +66,4 @@ const PractitionerDashboard = () => {
   );
 };
 
-export default PractitionerDashboard;
+export default PatientDashboard;

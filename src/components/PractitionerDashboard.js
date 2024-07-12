@@ -15,19 +15,26 @@ import Feedback from './Feedback';
 import Sidebar from './Sidebar';
 import '../styles/App.css';
 
+// Mock data for notifications
+const mockNotifications = [
+  "Appointment with patient John Doe at 10:00 AM",
+  "Test results for patient Jane Smith are available",
+  "New message from admin"
+];
+
 const PractitionerDashboard = () => {
   return (
     <div className="dashboard-container">
       <Sidebar role="practitioner" />
       <div className="main-content">
         <div className="card">
-          <WelcomeSection name="Practitioner" /> {/* Adjust to use actual practitioner's name */}
+          <WelcomeSection name="Practitioner" />
         </div>
         <div className="card">
           <PatientSearch />
         </div>
         <div className="card">
-          <Appointments />
+          <Appointments /> {/* Updated component */}
         </div>
         <div className="card">
           <DoctorAvailability />
@@ -54,7 +61,7 @@ const PractitionerDashboard = () => {
           <FAQs />
         </div>
         <div className="card">
-          <Notifications />
+          <Notifications notifications={mockNotifications} />
         </div>
         <div className="card">
           <Feedback />

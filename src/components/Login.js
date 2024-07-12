@@ -14,19 +14,26 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Hardcoded credentials for demo purposes
+    // Hardcoded credentials for admin and practitioner
     const credentials = {
       admin: { loginId: 'admin', password: 'admin123' },
       practitioner: { loginId: 'practitioner', password: 'practitioner123' },
-      patient: mockData.patients.find(patient => patient.loginId === loginId && patient.password === password)
     };
 
-    if (role === 'patient' && credentials[role]) {
-      login();
-      navigate(`/${role}`, { state: { loginId } });
-    } else if (credentials[role] && credentials[role].loginId === loginId && credentials[role].password === password) {
-      login();
-      navigate(`/${role}`);
+    // Check if the role is patient and find the corresponding patient in mockData
+    if (role === 'patient') {
+      const patient = mockData.patients.find(patient => patient.loginId === loginId && patient.password === password);
+      if (patient) {
+        login(patient, 'patient');
+        navigate('/patient', { state: { user: patient } });
+        return;
+      }
+    }
+
+    // Check for admin and practitioner login
+    if (credentials[role] && credentials[role].loginId === loginId && credentials[role].password === password) {
+      login(credentials[role], role);
+      navigate(`/${role}`, { state: { user: credentials[role] } });
     } else {
       alert('Invalid credentials');
     }

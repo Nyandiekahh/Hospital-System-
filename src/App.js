@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AdminDashboard from './components/AdminDashboard';
-import PractitionerDashboard from './components/PractitionerDashboard'; // Updated import
+import PractitionerDashboard from './components/PractitionerDashboard';
 import PatientDashboard from './components/PatientDashboard';
 import Login from './components/Login';
 import { AuthProvider } from './AuthContext';
@@ -17,7 +17,7 @@ function App() {
           <Route 
             path="/admin" 
             element={
-              <ProtectedRoute>
+              <ProtectedRoute role="admin">
                 <AdminDashboard />
               </ProtectedRoute>
             } 
@@ -25,7 +25,7 @@ function App() {
           <Route 
             path="/practitioner" 
             element={
-              <ProtectedRoute>
+              <ProtectedRoute role="practitioner">
                 <PractitionerDashboard />
               </ProtectedRoute>
             } 
@@ -33,7 +33,7 @@ function App() {
           <Route 
             path="/patient" 
             element={
-              <ProtectedRoute>
+              <ProtectedRoute role="patient">
                 <PatientDashboard />
               </ProtectedRoute>
             } 
