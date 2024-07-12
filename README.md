@@ -63,8 +63,8 @@ This Hospital Management System is a web application designed to streamline the 
 ### Installation
 
 1. Clone the repository
-2. Install the dependencies
-3. Start the development server
+2. Install the dependencies by running ```npm install```
+3. Start the development server by running ```npm start```
 4. Open your browser and navigate to `http://localhost:3000`
 
 ## Project Structure
