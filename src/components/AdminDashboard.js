@@ -1,5 +1,5 @@
-import React from 'react';
-import WelcomeSection from './WelcomeSection'; // Reuse if applicable, otherwise create specific for admin
+import React, { useState } from 'react';
+import WelcomeSection from './WelcomeSection';
 import HealthNews from './HealthNews';
 import FAQs from './FAQs';
 import SupportHelp from './SupportHelp';
@@ -15,16 +15,40 @@ import BillingInvoicing from './BillingInvoicing';
 import HealthResourcesManagement from './HealthResourcesManagement';
 import FeedbackSurveys from './FeedbackSurveys';
 import Sidebar from './Sidebar';
-import '../styles/App.css'; // Correct path to App.css
+import '../styles/App.css';
+import '../styles/Modal.css';
 
 const AdminDashboard = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="dashboard-container">
       <Sidebar role="admin" />
       <div className="main-content">
         <div className="card">
-          <WelcomeSection name="Admin" /> {/* Assuming a static welcome for the admin */}
+          <WelcomeSection name="Admin" />
         </div>
+        <div className="card">
+          <h2>Add New User</h2>
+          <p>Click the button below to add a new user to the system. You can add medical practitioners and patients.</p>
+          <button className="open-modal-button" onClick={handleOpenModal}>Add New User</button>
+        </div>
+        {isModalOpen && (
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close-button" onClick={handleCloseModal}>&times;</span>
+              <UserManagement />
+            </div>
+          </div>
+        )}
         <div className="card">
           <HealthNews />
         </div>
@@ -36,9 +60,6 @@ const AdminDashboard = () => {
         </div>
         <div className="card">
           <ProfileSettings />
-        </div>
-        <div className="card">
-          <UserManagement />
         </div>
         <div className="card">
           <RoleManagement />
