@@ -74,3 +74,23 @@
     background-color: #218838;
   }
   
+  .success-tick {
+    font-size: 2rem;
+    color: green;
+    animation: fadeInOut 3s;
+  }
+  
+  .success-message {
+    color: green;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    animation: fadeInOut 3s;
+  }
+  
+  @keyframes fadeInOut {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  

@@ -1,0 +1,105 @@
+{
+  "doctors": [
+    {
+      "id": 1720835697656,
+      "name": "Dr. Kariuki",
+      "dateOfBirth": "",
+      "gender": "",
+      "hospitalOfBirth": "",
+      "medicalId": "0719408098",
+      "hospital": "Kenyatta Hospital"
+    },
+    {
+      "id": 1720835870144,
+      "name": "Dr. Richard",
+      "dateOfBirth": "",
+      "gender": "",
+      "hospitalOfBirth": "",
+      "medicalId": "7312",
+      "hospital": "Juja Modern"
+    },
+    {
+      "id": 1720836251196,
+      "name": "Ehsh",
+      "dateOfBirth": "",
+      "gender": "",
+      "hospitalOfBirth": "",
+      "medicalId": "wergv",
+      "hospital": "werv"
+    },
+    {
+      "id": 1720838131650,
+      "name": "Dr. James",
+      "dateOfBirth": "",
+      "gender": "",
+      "hospitalOfBirth": "",
+      "medicalId": "629719",
+      "hospital": "Milele Centre"
+    }
+  ],
+  "patients": [
+    {
+      "id": 1720835905866,
+      "name": "Sam",
+      "dateOfBirth": "2024-07-05",
+      "gender": "Male",
+      "hospitalOfBirth": "Juja Modern",
+      "medicalId": "",
+      "hospital": ""
+    },
+    {
+      "id": 1720836237762,
+      "name": "New Patient",
+      "dateOfBirth": "2024-07-01",
+      "gender": "Male",
+      "hospitalOfBirth": "Juja Modern",
+      "medicalId": "",
+      "hospital": ""
+    },
+    {
+      "id": 1720836312555,
+      "name": "aerc",
+      "dateOfBirth": "2024-07-17",
+      "gender": "aercv",
+      "hospitalOfBirth": "qaercv",
+      "medicalId": "",
+      "hospital": ""
+    },
+    {
+      "id": 1720836891237,
+      "name": "nncnc",
+      "dateOfBirth": "2024-07-05",
+      "gender": "Male",
+      "hospitalOfBirth": "rhgfescn",
+      "medicalId": "",
+      "hospital": ""
+    },
+    {
+      "id": 1720837449104,
+      "name": "test",
+      "dateOfBirth": "2024-07-05",
+      "gender": "Female",
+      "hospitalOfBirth": "test hosp",
+      "medicalId": "",
+      "hospital": ""
+    },
+    {
+      "id": 1720837911387,
+      "name": "arf",
+      "dateOfBirth": "2024-07-03",
+      "gender": "Male",
+      "hospitalOfBirth": "qaercv",
+      "medicalId": "",
+      "hospital": ""
+    },
+    {
+      "id": 1720839369204,
+      "name": "aefe",
+      "dateOfBirth": "1976-01-07",
+      "gender": "Female",
+      "hospitalOfBirth": "erv",
+      "medicalId": "",
+      "hospital": ""
+    }
+  ]
+}

@@ -45,7 +45,7 @@ const AdminDashboard = () => {
           <div className="modal">
             <div className="modal-content">
               <span className="close-button" onClick={handleCloseModal}>&times;</span>
-              <UserManagement />
+              <UserManagement closeModal={handleCloseModal} />
             </div>
           </div>
         )}

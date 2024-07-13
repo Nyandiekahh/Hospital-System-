@@ -19,7 +19,7 @@ const UserList = ({ users, editUser, deleteUser }) => {
               <td>{user.type}</td>
               <td>
                 <button onClick={() => editUser(index)}>Edit</button>
-                <button onClick={() => deleteUser(index)}>Delete</button>
+                {user.type === 'doctor' && <button onClick={() => deleteUser(index)}>Delete</button>}
               </td>
             </tr>
           ))}

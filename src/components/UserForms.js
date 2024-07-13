@@ -10,6 +10,8 @@ const UserForms = ({ addUser }) => {
     medicalId: '',
     hospital: ''
   });
+  const [successMessage, setSuccessMessage] = useState('');
+  const [showTick, setShowTick] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -18,9 +20,20 @@ const UserForms = ({ addUser }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addUser(userType, formData);
+    const result = await addUser(userType, formData);
+    if (result) {
+      setSuccessMessage(userType === 'doctor' ? 'Doctor added successfully!' : 'Patient added successfully!');
+      setShowTick(true);
+    } else {
+      setSuccessMessage('Failed to add user.');
+      setShowTick(true);
+    }
+    setTimeout(() => {
+      setShowTick(false);
+      setSuccessMessage('');
+    }, 3000); // Hide tick and message after 3 seconds
     setFormData({
       name: '',
       dateOfBirth: '',
@@ -31,8 +44,14 @@ const UserForms = ({ addUser }) => {
     });
   };
 
+  // Get today's date in YYYY-MM-DD format
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <div>
+      <h2>User Management</h2>
+      {showTick && <div className="success-tick">✔</div>}
+      {successMessage && <div className="success-message">{successMessage}</div>}
       <select value={userType} onChange={(e) => setUserType(e.target.value)}>
         <option value="patient">Patient</option>
         <option value="doctor">Doctor</option>
@@ -48,22 +67,20 @@ const UserForms = ({ addUser }) => {
         />
         {userType === 'patient' && (
           <>
+            <label htmlFor="dateOfBirth">Date of Birth</label>
             <input
               type="date"
               name="dateOfBirth"
               value={formData.dateOfBirth}
               onChange={handleChange}
-              placeholder="Date of Birth"
+              max={today} // Prevent future dates
               required
             />
-            <input
-              type="text"
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              placeholder="Gender"
-              required
-            />
+            <select name="gender" value={formData.gender} onChange={handleChange} required>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
             <input
               type="text"
               name="hospitalOfBirth"
